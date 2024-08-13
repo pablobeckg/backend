@@ -1,0 +1,14 @@
+1) db.books.find({"author.firstName": "Jane", "author.lastName": "Austen"});
+2) db.books.find({"pages": {"$gt":500}});
+3) db.books.find({ "publishDate": { "$gt": "1880-01-01" } });
+4) db.books.find({language: "English"});
+5) db.books.find({"dimensions.height": {"$gt":"8 inches"}});
+6) db.books.find({$or: [{categories: "Classic"}, {categories: "Romance"}]});
+7) db.books.find({publisher: /Books/});
+8) db.books.find({"author.firstName": { "$regex": "^J"}});
+9) {publishDate: {$lt: "1847-12-31"}, categories: "Classic"};
+10) db.books.project({ "publishDate": { $gte: "yyyy-01-01", $lte: "yyyy-05-31" }});
+11) db.books.project({ "title": 1, "isbn": 1, "_id": 0 });
+12) db.books.sort({ "author.firstName": 1, "author.lastName": 1, "_id": 0 });
+13) db.books.sort({ "pages": 1 });
+14) db.books.sort().sort({ "pages": -1 })
