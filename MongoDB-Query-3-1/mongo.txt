@@ -1,0 +1,60 @@
+1) db.books.find({
+  $and: [
+    { $or: [
+      { "author.firstName": "Jane", "author.lastName": "Austen" },
+      { "author.firstName": "Charlotte", "author.lastName": "Brontë" }
+    ]},
+    { "publishDate": { $gt: "1840-12-31" } }
+  ]
+})
+
+2) {
+  $and: [
+    { "publishDate": { $gt: "1924"} },
+    { "categories": { $in: ["Classics", "Romance"] } }
+  ]
+}
+
+3) {
+  $and: [
+    { "pages": { $gte: 200, $lte: 500 } },
+    { "author.firstName": "Charles", "author.lastName": "Dickens" }
+  ]
+}
+
+4) {
+  $and: [
+    { $or: [
+      { "author.firstName": "Herman", "author.lastName": "Melville" },
+      { "author.firstName": "Mary", "author.lastName": "Shelley" }
+    ]},
+    { "availableFormats": { $in: ["Hardcover", "E-book"] } }
+  ]
+}
+
+5) db.books.find({
+  "categories": "Gothic Fiction"
+}).sort({ "pages": -1 })
+
+6) {
+  $and: [
+    { $expr: { $gt: [{ $size: "$availableFormats" }, 1] } },
+    { "publishDate": { $lt: "1850-01-01" } },
+    { "categories": "Adventure" }
+  ]
+}
+
+7) db.books.find({
+  $or: [
+    { "title": { $regex: /^The/ } },
+    { $and: [
+      { "pages": { $gt: 400 } },
+      { "categories": "Classics" }
+    ]}
+  ]
+})
+
+8) db.books.aggregate([
+  { $match: { "publishDate": { $gt: "1900-12-31" } } },
+  { $group: { _id: null, averagePages: { $avg: "$pages" } } }
+])

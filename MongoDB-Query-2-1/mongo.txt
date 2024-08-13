@@ -6,7 +6,7 @@
 6) db.books.find({$or: [{categories: "Classic"}, {categories: "Romance"}]});
 7) db.books.find({publisher: /Books/});
 8) db.books.find({"author.firstName": { "$regex": "^J"}});
-9) {publishDate: {$lt: "1847-12-31"}, categories: "Classic"};
+9) db.books.project({publishDate: {$lt: "1847-12-31"}, categories: "Classic"});
 10) db.books.project({ "publishDate": { $gte: "yyyy-01-01", $lte: "yyyy-05-31" }});
 11) db.books.project({ "title": 1, "isbn": 1, "_id": 0 });
 12) db.books.sort({ "author.firstName": 1, "author.lastName": 1, "_id": 0 });
